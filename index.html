@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<style>
+
+		body {
+			margin: 0;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.card-container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			white-space: nowrap;
+		}
+
+		.card {
+			display: inline-block;
+			position: relative;
+			overflow: hidden;
+			width: 300px;
+			height: 200px;
+			border: 1px solid gray;
+			border-radius: 10px;
+			cursor: pointer;
+			font-family: 'Open Sans';
+		}
+
+		.card:not(:first-child) {
+			margin-left: 40px;
+		}
+
+		.card:before {
+			position:absolute;
+			width:400px;
+			height:400px;
+			top:50%;
+			left:50%;
+			opacity:1;
+			border-radius:300px;
+			content: '';
+			animation-fill-mode: forwards;
+			transition: transform 0.3s cubic-bezier(0.47, 0, 0.75, 0.72);
+			transform: translate(-50%, -50%) scale(0);
+			z-index: 9;
+		}
+
+		.card:hover:before {
+			transform: translate(-50%, -50%) scale(1);
+		}
+
+		.card .card-name,
+		.card button {
+			position: absolute;
+			z-index: 10;
+		}
+
+		.card .card-name {
+			top: 10px;
+			font-size: 30px;
+			font-weight: bold;
+			animation-fill-mode: forwards;
+			transition: color 0.3s cubic-bezier(0.47, 0, 0.75, 0.72);
+		}
+
+		.card button {
+			border: 1px solid gray;
+			border-radius: 10px;
+			border: 0;
+			bottom: 10px;
+			left: 50%;
+			width: 90%;
+			transform: translateX(-50%);
+			transition: background-color 0.3s cubic-bezier(0.47, 0, 0.75, 0.72), color 0.3s cubic-bezier(0.47, 0, 0.75, 0.72);
+		}
+
+		</style>
+	</head>
+	<body>
+		<div class="card-container">
+			<div class="card pink">
+				<span class="card-name">
+					Matheus
+				</span>
+				<img src="https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04" />
+				<button type="button">
+					Click me
+				</button>
+			</div>
+			<div class="card red">
+				<span class="card-name">
+					Matheus
+				</span>
+				<img src="https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04" />
+				<button type="button">
+					Click me
+				</button>
+			</div>
+			
+		</div>
+		<script>
+			(function() {
+
+				let themes = {
+					red: {
+						primaryBackground: 'white',
+						primaryColor: 'red',
+						secondaryBackground: 'red',
+						secondaryColor: 'white'
+					},
+					pink: {
+						primaryBackground: 'white',
+						primaryColor: '#f920be',
+						secondaryBackground: '#f920be',
+						secondaryColor: 'white'
+					},
+					blue: {
+						primaryBackground: 'white',
+						primaryColor: 'blue',
+						secondaryBackground: 'blue',
+						secondaryColor: 'white'
+					}
+				}
+				let cards = [{
+					title: 'test',
+					buttonText: 'click me',
+					img: 'https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04',
+					theme: 'red'
+				},{
+					title: 'test',
+					buttonText: 'click me',
+					img: 'https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04',
+					theme: 'pink'
+				},{
+					title: 'test',
+					buttonText: 'click me',
+					img: 'https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04',
+					theme: 'blue'
+				}]
+				let container = document.querySelector('.card-container');
+				let cardElement = document.createElement("div")
+				cards.forEach(card => {
+					cardElement.innerHTML = '<span class="card-name">' + card.title + '</span><img src="' + card.img + '" /><button type="button">' + card.buttonText + '</button>';
+					cardElement.classList.add('card')
+					cardElement.classList.add(card.theme)
+					container.appendChild(cardElement);
+				})
+				function createClass(name,rules){
+					var style = document.createElement('style');
+					style.type = 'text/css';
+					document.getElementsByTagName('head')[0].appendChild(style);
+					if(!(style.sheet||{}).insertRule) 
+						(style.styleSheet || style.sheet).addRule(name, rules);
+					else
+						style.sheet.insertRule(name+"{"+rules+"}",0);
+				}
+
+				
+
+				const createTheme = (themeName, theme)  => {
+					createClass('.' + themeName + '.card',"background-color: " + theme.primaryBackground + ";");
+					createClass('.' + themeName + '.card:before',"background-color:" + theme.secondaryBackground + ";");
+					createClass('.' + themeName + '.card button',"background-color: " + theme.secondaryBackground + "; color: " + theme.secondaryColor + ";");
+					createClass('.' + themeName + '.card:hover button',"background-color: " + theme.primaryBackground + ";color: " + theme.primaryColor + ";");
+					createClass('.' + themeName + '.card .card-name',"color: " + theme.primaryColor + ";");
+					createClass('.' + themeName + '.card:hover .card-name',"color: " + theme.secondaryColor + ";");
+				}
+				Object.keys(themes).forEach(theme => createTheme(theme, themes[theme]))
+			})()
+		</script>
+	</body>
+</html>
