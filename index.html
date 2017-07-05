@@ -81,25 +81,6 @@
 	</head>
 	<body>
 		<div class="card-container">
-			<div class="card pink">
-				<span class="card-name">
-					Matheus
-				</span>
-				<img src="https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04" />
-				<button type="button">
-					Click me
-				</button>
-			</div>
-			<div class="card red">
-				<span class="card-name">
-					Matheus
-				</span>
-				<img src="https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04" />
-				<button type="button">
-					Click me
-				</button>
-			</div>
-			
 		</div>
 		<script>
 			(function() {
@@ -127,22 +108,22 @@
 				let cards = [{
 					title: 'test',
 					buttonText: 'click me',
-					img: 'https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04',
+					img: 'https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
 					theme: 'red'
 				},{
 					title: 'test',
 					buttonText: 'click me',
-					img: 'https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04',
+					img: 'https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
 					theme: 'pink'
 				},{
 					title: 'test',
 					buttonText: 'click me',
-					img: 'https://www.gravatar.com/avatar/5359cbd814537905a9e3066873b19b04',
+					img: 'https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
 					theme: 'blue'
 				}]
 				let container = document.querySelector('.card-container');
-				let cardElement = document.createElement("div")
 				cards.forEach(card => {
+					let cardElement = document.createElement("div")
 					cardElement.innerHTML = '<span class="card-name">' + card.title + '</span><img src="' + card.img + '" /><button type="button">' + card.buttonText + '</button>';
 					cardElement.classList.add('card')
 					cardElement.classList.add(card.theme)
@@ -157,7 +138,6 @@
 					else
 						style.sheet.insertRule(name+"{"+rules+"}",0);
 				}
-
 				
 
 				const createTheme = (themeName, theme)  => {
